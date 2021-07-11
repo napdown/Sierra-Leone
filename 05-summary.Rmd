@@ -1,0 +1,105 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
+``` 
+# Priority Adaptation Actions
+
+## Introduction 
+
+This chapter presents the primary government stakeholders and adaptation priorities programs for Sierra Leone’s initial NAP.  The Government of Sierra Leone has defined the following priority sectors for its NAP:
+
+*	Agriculture and food security
+*	Water resources and energy
+*	Coastal zone management (including fisheries, coastal ecosystems etc.)
+*	Environment (including tourism, land, mineral resources, forestry, etc.)
+*	Disaster management
+*	Cross-cutting priority: Hard and Soft Infrastructure (including water and sanitation, transportation, health etc.)
+*	Cross-cutting priority: Gender Equality and Social Inclusion (focusing on youth, women, elderly, persons with disabilities)
+
+This chapter includes an analysis and compilation of existing adaptation priorities that are within these defined sectors. The following plans were analyzed and included in the priority programs that are included in this chapter:  
+
+*	Initial National Communications (INC)
+*	Second National Communications (2NC)
+*	Third National Communications (3NC)
+*	Nationally Determined Contributions (NDC)
+*	National Adaptation Programmes of Action (NAPA)
+*	Coastal Climate Change Adaptation Plan (CCCAP)
+*	Low-Carbon Climate-Resilient Development Strategy (LCCRDS) 
+*	National Climate Change Strategy and Action Plan (NCCSAP). 
+*	Medium-term National Development Plan (MTNDP)
+*	National Framework for Climate Services (NFCS)
+*	Integrated Coastal Zone Management Plan (ICZMP)
+*	Offgrid Solar Energy Strategy (OGSES)
+
+These priorities were validated at the initial NAP stakeholder consultation workshop conducted in Freetown in October 2020. Within these sectors, the priorities that are supportive and linked  have been classified into programs of adaptation. This is just a first step in this process. After additional consultations and vulnerability and risk assessments, these priorities will be developed further or modified to meet current and future needs.
+
+
+## Key Government Stakeholders By Priority
+
+```{r}
+library(flextable)
+library(magrittr)
+govt_stakehds<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "Government Stakeholders ")
+t1<-flextable(govt_stakehds,col_keys = names(govt_stakehds),
+  cwidth = 3,
+  cheight = 0.01,
+  defaults = list(),
+   theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 8)
+t3<-border_outer(t2,part = 'all', border = NULL)
+t4<-border_inner(t3,part = 'all', border = NULL)
+t4
+
+```
+
+##   Priority Adaptation Programs
+
+The priority adaptation programs have been divided by sector and included in table 6.3 below.  The adaptation programs each have been classified according to five categories. The categories are described below:  
+
+1.	Physical investments: These are priorities which involve building or construction.
+2.	Human capacity development: These are priorities that involve training or capacity development for individuals both within the government and among non-government stakeholders (e.g. private sector, NGOs, CSOs etc.).  
+3.	Institutional strengthening:  This refers to priorities that involve improving institutional capacity and other aspects of governance.  
+4.	Regulatory modifications:  This category refers to priorities that involve modification or enhancement of sectoral and/or subnational policy, regulatory, or legal frameworks.  
+5.	Research:  This identifies priorities that involve enhancing available data and information as well as the associated capacities to produce, process, and utilize data and information. 
+
+
+
+## Priority Actions by Sector, Program and Type 
+
+```{r}
+library(flextable)
+library(magrittr)
+pr_actions<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "Priority Actions ")
+t1<-flextable(pr_actions,col_keys = names(pr_actions),
+  cwidth = 3,
+  cheight = 0.01,
+  defaults = list(),
+   theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 8)
+t3<-border_outer(t2,part = 'all', border = NULL)
+t4<-border_inner(t3,part = 'all', border = NULL)
+t5<-bold(t4,i=c(1,8,16,17,23,33,38,39,43,46,52,53,62,66,70,71,75,77,80,87,93))
+t6<-bold(t5, part='header')
+t6
+
+```
+ 
+ 
+ 
+## Sector Needs and Opportunities 
+
+Drawing on information collected from the inception workshop and consultations (including the SWOT analysis in Annex 1), there are clear needs for across the national government to be able to fulfill these priority programs:  
+
+All priority sectors require:
+
+*	Legislation to integrate adaptation into sector policy, work plans and projects, monitoring and evaluation
+*	Clarification of mandates related to climate change adaptation 
+*	Increased enforcement of existing laws and regulations 
+*	Integrated planning for adaptation across sectors and across national and local government 
+*	Need for technical working group and focal points to improve coordination, collaboration and information exchange across sectors 
+*	Capacity building at the national and local level, especially for women and other marginalized groups 
+*	Increased incentives for private sector engagement on adaptation 
+*	Increased number of staff and staff capacity
+*	Improved access to information across within and across sectors  
+*	Increased funding for adaptation work 
