@@ -1,0 +1,63 @@
+--- 
+title:   ""     
+author: ""
+date: " "
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Sierra Leone National Adaptation Plan"
+---
+
+#  {-}
+
+![](images/logos.png){width=600px style="display: block; margin:0 auto;"}
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
+
+``` 
+
+# Preliminaries
+## Acronyms
+```{r}
+library(flextable)
+library(magrittr)
+library(kableExtra)
+acronyms<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "Acronyms")
+t1<-flextable(acronyms,col_keys = names(acronyms),
+  cwidth = 3,
+  cheight = 0.01,
+  defaults = list(),
+    theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 10)
+t3<-border_remove(t2)
+t3
+
+```
+
+
+## Executive Summary
+This document serves as Sierra Leone’s initial National Adaptation Plan (NAP) submission to the United Nations Framework Convention on Climate Change (UNFCCC).  The National Adaptation Plan (NAP) process was established under the United Nations Framework Convention on Climate Change (UNFCCC) in 2010 as part of the Cancun Adaptation Framework. The process enables Parties to the UNFCCC to formulate and implement NAPs as a means of identifying medium- and long-term adaptation needs and for developing and implementing strategies and programs to address those needs. The NAP should be understood as a continuous, progressive, and iterative process that follows a country-driven, gender-responsive, participatory, and fully transparent approach. The objectives of the NAP process are:
+
+*	To reduce vulnerability to the impacts of climate change by building adaptive capacity and resilience; and   
+*	To facilitate the integration of climate change adaptation, in a coherent manner, into relevant new and existing policies, programs and activities, in particular development planning processes and strategies, within all relevant sectors and at different levels, as appropriate.  
+
+The Government of Sierra Leone views its NAP as a continuous, progressive and iterative process to ensure a systematic and strategic approach to climate change adaptation in all government decision making, which will facilitate institutional coordination, resource mobilization, technology transfer and—ultimately—effective adaptation actions.  This document is, therefore, a step forward in building a more resilient Sierra Leone. Ultimately, the NAP vision is to “reduces vulnerability by half by 2030 through increased risk awareness, improvements in rule compliance, increased institutional capacity and an integrated gender-responsive approach to adaptation in development policy and programs across sectors and scales.”
+
+Through the process to develop this NAP, five priority sectors and two cross-cutting priorities were identified. These priorities are the central pillars that are used to guide the document and are directly connected to the Medium-Term Development Plan (2019-2023). The sectoral and cross-cutting priorities are (1) Agriculture and Food Security, (2) Water Resources and Energy, (3) Coastal Zone Management, (4) Environment, (5) Disaster management, (6) Gender Equality and  Social Inclusion and (7) Hard and Soft Infrastructure. 
+
+Drawing on existing climate policies, the NAP develops programs across these priorities that can be implemented with additional resources. Additionally, it provides an institutional framework for the NAP process moving forward and ways in which the NAP can be integrated into the Medium-Term Development planning process. Finally, the NAP provides recommendations for next steps moving forward. 
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+

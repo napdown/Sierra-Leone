@@ -28,6 +28,7 @@ library(magrittr)
 library(R.utils)
 library(sf)
 library(plotly)
+library(ggplot2)
 ```
 
 ```{r data-download, cache=TRUE, include=FALSE}
@@ -44,23 +45,34 @@ library(plotly)
 ```{r geom-extent,include=FALSE}
 sleone0<-getData('GADM', country='SLE', level=0)
 sleone1<-getData('GADM', country='SLE', level=1)
+sleone2<-getData('GADM', country='SLE', level=2)
 #getData('ISO3')
 
-#regions
+sl<-st_as_sf(sleone1)
+sl2<-st_as_sf(sleone2)
+
+#admin1
 slregions<-split(sleone1, sleone1$NAME_1)
-slcoast<-merge(slregions$Western,slregions$Southern)
-slinland<-merge(slregions$Eastern, slregions$Northern)
+slcoast<-slregions$Western+slregions$Southern
+slinland<-slregions$Eastern+slregions$Northern
+
+#admin2
+sl.admn2<-split(sleone2, sleone2$NAME_1)
+admn2.coast<-sl.admn2$Western+sl.admn2$Southern
+admn2.inland<-sl.admn2$Eastern+sl.admn2$Northern
 
 ```
 
 ```{r mask-raster, cache=TRUE, include=FALSE}
+library(cruts)
+#pr1<-cruts2raster("C:\\Workspace\\RMardown_NAPS\\Open-NAPs-Data\\opennaps\\cru_ts4.05.1901.2020.pre.dat.nc", poly = sleone0, timeRange = c('1981-01-01','2019-12-31') )
 
-prstack<-stack("cru_ts4.05.1901.2020.pre.dat.nc")
+prstack<-stack("C:\\Workspace\\RMardown_NAPS\\Open-NAPs-Data\\opennaps\\cru_ts4.05.1901.2020.pre.dat.nc")
 crop<-raster::crop(prstack, sleone0)
 pr_mask<-mask(crop,sleone0)
 plot(pr_mask) ## optional; to view raster
 
-tmp<-stack("cru_ts4.05.1901.2020.tmp.dat.nc")
+tmp<-stack("C:\\Workspace\\RMardown_NAPS\\Open-NAPs-Data\\opennaps\\cru_ts4.05.1901.2020.tmp.dat.nc")
 tcrop<-raster::crop(tmp, sleone0)
 tmask<-mask(tcrop, sleone0)
 
@@ -130,14 +142,14 @@ colnames(tmpdf)[colnames(tmpdf)=="value"]<-"tmean"
 
 ```{r monthly-ts, echo=FALSE}
 
-pr_monthly<-prdf%>% group_by(Month)%>%
+pr_monthly<-prdf%>%dplyr::filter(Year>=1981)%>% group_by(Month)%>%
   summarise(across(contains("pr"), ~mean(pr))) 
 #pr_monthly$Month<-factor(pr_monthly$Month,levels = c('06','07','08','09','10','11','12','01','02','03','04','05')) # reorder the months to start plotting from June to January
 
 #tsprmon<- ts(pr_monthly$pr)
 #plot(tsprmon)
 
-tmp_monthly<-tmpdf%>%group_by(Month)%>%summarise('tmean'=mean(tmean))
+tmp_monthly<-tmpdf%>%dplyr::filter(Year>=1981)%>%group_by(Month)%>%summarise('tmean'=mean(tmean))
 
 pr_tmp<-cbind(pr_monthly,tmp_monthly)
 pr_tmp<-pr_tmp[,-3]
@@ -146,28 +158,124 @@ ty<-list(overlaying = "y",
   side = "right",
   title = "Temperature (°C)",
   autotick = FALSE,
-      dtick = 1,
- range=c(24,30)
+      dtick = 10,
+ range=c(0,30)
   )
 
 plotly::plot_ly(type= 'bar', data= pr_tmp, x= ~Month, y= ~pr, name = 'Precipitation')%>%
-  plotly::add_lines(x= ~Month, y= ~tmean, name= 'Temperature', yaxis='y2')%>%
-    plotly::layout(legend=list(orientation='h', y=-0.18,x=0.3), yaxis=list(title='Precipitation (mm)',showticklables=F, range=c(0,600)),width=600, height=500, title='Sierra Leone \n (Mean 1901-2020)', yaxis2=ty)
+  plotly::add_lines(x= ~Month, y= ~tmean, mode = 'lines+markers',col='#D21919', name= 'Temperature', yaxis='y2')%>%
+  #plotly::add_markers(x= ~Month, y= ~tmean, pch=1,color='#D21919', yaxis='y2', name='')%>%
+    plotly::layout(legend=list(orientation='h', y=-0.18,x=0.3), yaxis=list(title='Precipitation (mm)',showticklables=F, range=c(0,600)),width=600, height=500, title='Sierra Leone \n (Mean 1981-2020)', yaxis2=ty)
 
 
 ```
   
+  
+
+
+
+  
 Normal precipitation and temperature for Sierra Leone (1981 – 2010). Data from the Climatic Research Unit CRU.CY.4.04 dataset (Harris et al., 2020).
 
+
+```{r ggplot-monthly-ts, echo=FALSE}
+
+#pr_monthly<-prdf%>% group_by(Month)%>%
+ # summarise(across(contains("pr"), ~mean(pr))) 
+#pr_monthly$Month<-factor(pr_monthly$Month,levels = c('06','07','08','09','10','11','12','01','02','03','04','05')) # reorder the months to start plotting from June to January
+
+#tsprmon<- ts(pr_monthly$pr)
+#plot(tsprmon)
+
+#tmp_monthly<-tmpdf%>%group_by(Month)%>%summarise('tmean'=mean(tmean))
+
+#pr_tmp<-cbind(pr_monthly,tmp_monthly)
+#pr_tmp<-pr_tmp[,-3] 
+ 
+
+#coeff<-0.1
+#pr_tmp%>% ggplot(aes(x=Month))+
+#geom_col(aes(y=pr))+
+ #geom_line(aes(y=tmean/coeff), size=9, color='red')+
+  #scale_y_continuous(name='Precipitation (mm)', sec.axis = sec_axis(trans=~.*coeff, name='Temperature'))
+
+```
 
 ## Historical observations to assess variability, trends and extremes
 
 __Temperature __
 Mean temperature in Sierra Leone has been above normal in recent decades (figures 1a and 1b). A signal of warming in Sierra Leone’s is found in relation to base-periods 1961-1990 and 1981-2010. An overall warming of the country is more evident when anomalies are calculated using 1961-1990 as a base period, with increasing positive anomalies since the late 1980’s. On the other hand, when anomalies are calculated using the base period 1981-2010, a constant warming is observed in at least the last two decades. 
 
- ![Fig. 1a. Annual temperature anomalies (C) for Sierra Leone (1950 – 2019) in relation to the 1961 -1990 mean, calculated from the Climatic Research Unit CRU.CY.4.04 dataset (Harris et al., 2020).](images/temp_anomaly_1990.png)
+```{r}
+library(tidyr)
+library(dplyr)
+library(magrittr)
+# mean temp 1901-2019
+TEMP <- read.table("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/Sierra-Leone/CRU.CY.4.04.TEMP.txt", header=TRUE, quote="\"", stringsAsFactors=TRUE)
+
+mtemp<-TEMP[,c(-1,-14,-15,-16,-17,-18)]
+anntemp<-TEMP[,c(1,18)]
+
+# base 1961-1990
+base81<-subset(anntemp, YEAR>1960)%>%subset( YEAR<1991)
+
+meanbase<-sum(base81$ANN)/30
+  
+anntemp$anomaly<-anntemp$ANN-meanbase
+
+anntemp$pos<-anntemp$anomaly >=0
+
+#anntemp%>%dplyr::filter(YEAR>1950)%>%
+#plotly::plot_ly(type = 'bar', x=~YEAR, y=~anomaly, color =~pos)%>%
+  #plotly::layout(yaxis=list(title='Temperature Anomaly (°C)',title='Sierra Leone \n (Mean 1901-2020)'))
+
+library(ggplot2)
+anntemp%>%dplyr::filter(YEAR>1950)%>%
+ggplot()+
+  geom_col(aes(x = YEAR, y = anomaly, fill = pos),position = "identity", colour = "white", size = 0.01) +
+  labs(x='Year', y= 'Temperature Anomaly (°C)')+
+  ggtitle('   Sierra Leone \n(Base: 1961-1990)')+
+  scale_fill_manual(values = c('blue', 'red'), guide = 'none')
+
+
+```
+
+
+
+Fig. 1a. Annual temperature anomalies (C) for Sierra Leone (1950 – 2019) in relation to the 1961 -1990 mean, calculated from the Climatic Research Unit CRU.CY.4.04 dataset (Harris et al., 2020).
  
-![Fig. 1b. Annual temperature anomalies (C) for Sierra Leone (1950 – 2019) in relation to the 1981 -2010 mean, calculated from the Climatic Research Unit CRU.CY.4.04 dataset (Harris et al., 2020).](images/temp_anomaly_2010.png)
+ 
+```{r}
+library(tidyr)
+library(dplyr)
+library(magrittr)
+# mean temp 1901-2019
+TEMP <- read.table("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/Sierra-Leone/CRU.CY.4.04.TEMP.txt", header=TRUE, quote="\"", stringsAsFactors=TRUE)
+
+mtemp<-TEMP[,c(-1,-14,-15,-16,-17,-18)]
+anntemp<-TEMP[,c(1,18)]
+
+# base 1981-2010
+base81<-subset(anntemp, YEAR>1980)%>%subset( YEAR<2011)
+
+meanbase<-sum(base81$ANN)/30
+  
+anntemp$anomaly<-anntemp$ANN-meanbase
+
+anntemp$pos<-anntemp$anomaly >=0
+
+anntemp%>%dplyr::filter(YEAR>1950)%>%
+ggplot()+
+  geom_col(aes(x = YEAR, y = anomaly, fill = pos),position = "identity", colour = "white", size = 0.01) + ggtitle('   Sierra Leone \n(Base: 1981-2010)')+
+  labs(x='Year', y= 'Temperature Anomaly (°C)')+
+  scale_fill_manual(values = c('blue', 'red'), guide = "none")
+
+```
+ 
+
+
+Fig. 1b. Annual temperature anomalies (C) for Sierra Leone (1950 – 2019) in relation to the 1981 -2010 mean, calculated from the Climatic Research Unit CRU.CY.4.04 dataset (Harris et al., 2020).
+
 
 Based on the European reanalysis (ERA5; C3S, 2017), using 98 ERA5 daily temperature grid points over Sierra Leone, climate change indices and sector-specific climate indices reveal the picture of how climate change has impacted temperature in recent years at the country level. Climate indices (figure 1c) have been produced with Climpact3 -a software that allows calculation of climate indices from daily precipitation and temperature data (Alexander and Herold 2015).   
 Overall, between 1981 and 2019 (in relation to the base-period 1981-2010), evidence is found of a decrease in the diurnal temperature range (the difference between maximum and minimum temperature is decreasing); in addition, the annual percentage of cold nights (Tx10p, days when Tn < 10th percentile) and the annual percentage of cold days (Tx10p, days when Tx < 10th percentile) present a decreasing trend for the last 40 years (figure 2, a,b,c).  
@@ -215,24 +323,34 @@ basemn<-sum(sl.tmean)/12
 ```
 
 ```{r ssp245-national}
-tn245.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmin245/wc2.1_2.5m_tmin_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
-tx245.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmax245/wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
+tn245.40<-raster("wc2.1_2.5m_tmin_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
+tx245.40<-raster("wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
 tmn245.40<-(tn245.40+tx245.40)/2
 #plot(tmn245.40)
 tvar245<-basemn-tmn245.40
-plot(tvar245)
+
+
+plot(tvar245, xlab='Longitude', ylab='Latitude')
+plot(sleone2, add=T)
+
 ```
+
 Fig. 4a. Mean temperature change (C) for Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the medium emissions scenario (ssp245). BCC-CSM2-MR Model
 
 
 ```{r ssp245-coast}
-tn245.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmin245/wc2.1_2.5m_tmin_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
-tx245.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmax245/wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
+tn245.40_coast<-raster("wc2.1_2.5m_tmin_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
+tx245.40_coast<-raster("wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
 tmn245.40_coast<-(tn245.40_coast+tx245.40_coast)/2
 #plot(tmn245.40_coast)
 tvar245_coast<-basemn-tmn245.40_coast
-plot(tvar245_coast)
+
+
+#sf_coast<-st_as_sf(slcoast)
+plot(tvar245_coast, xlab='Longitude', ylab='Latitude')
+plot(admn2.coast, add=TRUE)
 ```
+
 Fig. xx Mean temperature change (C) for Western & Southern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the medium emissions scenario (ssp245). BCC-CSM2-MR Model 
 
 ```{r ssp245-inland}
@@ -241,8 +359,12 @@ tx245.40_inland<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_F
 tmn245.40_inland<-(tn245.40_inland+tx245.40_inland)/2
 #plot(tmn245.40_inland)
 tvar245_inland<-basemn-tmn245.40_inland
-plot(tvar245_inland)
+
+sf_inland<-st_as_sf(slinland)
+plot(tvar245_inland, xlab='Longitude', ylab='Latitude')
+plot(admn2.inland, add=TRUE)
 ```
+
 Fig. xx Mean temperature change (C) for Eastern & Northern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the medium emissions scenario (ssp245). BCC-CSM2-MR Model 
 
 ```{r ssp370}
@@ -259,8 +381,10 @@ tn585.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data
 tx585.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmax585/wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp585_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
 tmn585.40<-(tn585.40+tx585.40)/2
 tvar585<-basemn-tmn585.40
-plot(tvar585)
+plot(tvar585, xlab='Longitude', ylab='Latitude')
+plot(sleone2, add=T)
 ```
+
 Fig. 4b. Mean temperature change (C) for Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (585). BCC-CSM2-MR Model. 
 
 ```{r ssp585-coast}
@@ -268,7 +392,8 @@ tn585.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fu
 tx585.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmax585/wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp585_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
 tmn585.40_coast<-(tn585.40_coast+tx585.40_coast)/2
 tvar585_coast<-basemn-tmn585.40_coast
-plot(tvar585_coast)
+plot(tvar585_coast, xlab='Longitude', ylab='Latitude')
+plot(admn2.coast, add=TRUE)
 ```
   
 Fig. 4b. Mean temperature change (C) for Western & Southern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (585). BCC-CSM2-MR Model.
@@ -278,7 +403,8 @@ tn585.40_inland<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_F
 tx585.40_inland<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/tmax585/wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp585_2021-2040.tif")%>%crop(slinland)%>%mask(slinland)
 tmn585.40_inland<-(tn585.40_inland+tx585.40_inland)/2
 tvar585_inland<-basemn-tmn585.40_inland
-plot(tvar585_inland)
+plot(tvar585_inland, xlab='Longitude', ylab='Latitude')
+plot(admn2.inland, add=TRUE)
 ```
 
 Fig. 4b. Mean temperature change (C) for Eastern & Northern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (585). BCC-CSM2-MR Model.  
@@ -301,7 +427,8 @@ plot(basepr)
 pr126.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr126/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp126_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
 #plot(pr126.40)
 prvar126<-basepr-pr126.40
-plot(prvar126)
+plot(prvar126, xlab='Longitude', ylab='Latitude')
+plot(sleone2, add=T)
 ```
  
 Fig. 5a. Precipitation (annual mean) for Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (SSP585). BCC-CSM2-MR Model. 
@@ -310,15 +437,18 @@ Fig. 5a. Precipitation (annual mean) for Sierra Leone for 2020 – 2040 compared
 pr126.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr126/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp126_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
 #plot(pr126.40)
 prvar126_coast<-basepr-pr126.40_coast
-plot(prvar126_coast)
+plot(prvar126_coast, xlab='Longitude', ylab='Latitude')
+plot(admn2.coast, add=TRUE)
 ```
+
 Fig. xx. Precipitation (annual mean) for Western & Southern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the low emissions scenario (SSP126). BCC-CSM2-MR Model.
 
 ```{r pr126-inland}
 pr126.40_inland<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr126/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp126_2021-2040.tif")%>%crop(slinland)%>%mask(slinland)
 #plot(pr126.40)
 prvar126_inland<-basepr-pr126.40_inland
-plot(prvar126_inland)
+plot(prvar126_inland, xlab='Longitude', ylab='Latitude')
+plot(admn2.inland, add=TRUE)
 ```
 
 Fig. xx. Precipitation (annual mean) for Northern & Eastern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the low emissions scenario (SSP126). BCC-CSM2-MR Model.  
@@ -327,24 +457,30 @@ Fig. xx. Precipitation (annual mean) for Northern & Eastern Sierra Leone for 202
 pr245.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr245/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
 #plot(pr245.40)
 prvar245<-basepr-pr245.40
-plot(prvar245)
+plot(prvar245, xlab='Longitude', ylab='Latitude')
+plot(sleone2, add=T)
 ```
+
 Fig. 5b. Precipitation (annual mean) for Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the medium emissions scenario (SSP245). BCC-CSM2-MR Model.
 
 ```{r pr245-coast}
 pr245.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr245/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
 #plot(pr245.40)
 prvar245_coast<-basepr-pr245.40_coast
-plot(prvar245_coast)
+plot(prvar245_coast, xlab='Longitude', ylab='Latitude')
+plot(admn2.coast, add=TRUE)
 ```
+
 Fig. xx. Precipitation (annual mean) for Western & Southern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the medium emissions scenario (SSP245). BCC-CSM2-MR Model.
 
 ```{r pr245-inland}
 pr245.40_inland<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr245/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp245_2021-2040.tif")%>%crop(slinland)%>%mask(slinland)
 #plot(pr245.40)
 prvar245_inland<-basepr-pr245.40_inland
-plot(prvar245_inland)
+plot(prvar245_inland, xlab='Longitude', ylab='Latitude')
+plot(admn2.inland, add=TRUE)
 ```
+
 Fig. xx. Precipitation (annual mean) for Northern & Eastern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the medium emissions scenario (SSP245). BCC-CSM2-MR Model.  
 
 
@@ -359,24 +495,32 @@ Fig. xx. Precipitation (annual mean) for Northern & Eastern Sierra Leone for 202
 pr585.40<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr585/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp585_2021-2040.tif")%>%crop(sleone0)%>%mask(sleone0)
 #plot(pr585.40)
 prvar585<-basepr-pr585.40
-plot(prvar585)
+plot(prvar585, xlab='Longitude', ylab='Latitude')
+plot(sleone2, add=TRUE)
 ```
+
 Fig. 5c. Precipitation (annual mean) for Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (SSP585). BCC-CSM2-MR Model.  
 
 ```{r pr-585-coast}
 pr585.40_coast<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr585/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp585_2021-2040.tif")%>%crop(slcoast)%>%mask(slcoast)
 #plot(pr585.40)
 prvar585_coast<-basepr-pr585.40_coast
-plot(prvar585_coast)
+plot(prvar585_coast,  xlab='Longitude', ylab='Latitude')
+plot(admn2.coast, add=TRUE)
 ```
+
 Fig. xx. Precipitation (annual mean) for Western & Southern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (SSP585). BCC-CSM2-MR Model.
 
 ```{r pr-585-inland}
 pr585.40_inland<-raster("C:/Workspace/RMardown_NAPS/Open-NAPs-Data/opennaps/WC_Fut_data/pr585/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp585_2021-2040.tif")%>%crop(slinland)%>%mask(slinland)
 #plot(pr585.40)
 prvar585_inland<-basepr-pr585.40_inland
+
 plot(prvar585_inland, xlab='Longitude', ylab='Latitude')
+plot(admn2.inland, add=TRUE)
+
 ```
+
 Fig. xx. Precipitation (annual mean) for Northern & Eastern Sierra Leone for 2020 – 2040 compared to reference period 1971 – 2000 for the high emissions scenario (SSP585). BCC-CSM2-MR Model.  
 
 __Extreme Events__
