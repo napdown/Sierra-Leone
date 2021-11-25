@@ -1,0 +1,5 @@
+"0","pr245.40_coast<-stack(""wc2.1_2.5m_prec_BCC-CSM2-MR_ssp245_2021-2040.tif"")%>%crop(slcoast)%>%mask(slcoast)"
+"0","#plot(pr245.40)"
+"0","prvar245_coast<-pr245.40_coast-basecoast"
+"0","names(prvar245_coast)<-month.abb"
+"0","plot(prvar245_coast, xlab='Longitude', ylab='Latitude')"

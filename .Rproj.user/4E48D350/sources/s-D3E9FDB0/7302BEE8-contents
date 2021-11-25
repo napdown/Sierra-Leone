@@ -1,0 +1,158 @@
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
+``` 
+# Institutional Arrangements for the NAP Process
+
+## Introduction 
+
+This chapter demonstrates how the NAP priorities are linked to the current Medium-Term Development Plans and how the NAP process can serve as an entry point to integrate adaptation into national and local planning processes. This policy linkages provide a mechanism to understand how the NAP is incorporated into the current institutional system. Additionally, this chapter presents the coordination mechanism for the NAP process. 
+
+## Linking NAP Priorities to the Medium-Term National Development Plan 
+
+The NAP priorities have clear linkages to various clusters in Sierra Leone’s Medium-Term National Development Plan (2019-2023) (Government of Sierra Leone 2019). While the country’s vision for the environment and climate change adaptation is clearly stated in cluster 7 of Sierra Leone’s Medium-term National Development Plan (2019–2023) (Government of Sierra Leone 2019), the NAP includes issues that cross sectors and therefore clusters. This provides an implicit mandate for addressing the priorities in the NAP. Additionally, since the MTDP is explicitly connected to the SDGs, this provides an alignment between the three policies. The linkages between the NAP and MTDP goals are provided in the table below. 
+
+
+```{r}
+
+nap_priorities<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "NAP-MTDP")
+t1<-flextable(nap_priorities,col_keys = names(nap_priorities),
+  cwidth = 3,
+  cheight = 0.01,
+  defaults = list(),
+   theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 8)
+t3<-border_outer(t2,part = 'all', border = NULL)
+t4<-border_inner(t3,part = 'all', border = NULL)
+t5<-bold(t4, part='header')
+t5
+```
+
+
+Given these linkages between the NAP priorities and the MTDP, the documents and their implementation become mutually supportive. By integrating the NAP into the MTDP activities (see the process described in 7.3), it ensures that development strategies are climate resilient. Since the MTDP directs the actions of MDAs and local councils, this also serves as a path to integrate adaptation into sector and local planning. Specifically, the MTDP is used by MDAs and councils to develop their plans and strategies. These plans and strategies are used to determine budget allocations. Through linking the NAP and the MTDP, it ensures there is budget allocations for adaptation activities and that all local investments are climate sensitive.   
+
+As the MTDP is reviewed in 2023, the NAP process and its connected vulnerability assessments  will help to inform national priorities across sectors to help secure development and investment decisions from climate risks. The integration of the NAP into the next round of the MTDP streamlines the planning, budgeting and M&E process. This has many advantages for supporting implementation and ultimately in sustaining adaptation activities. Local councils can then allocate funds for adaptation priorities presented in the NAP. This will also ensure that development finance can be channeled to the local level to address local climate vulnerabilities, and climate resilient development while also being explicitly tied to national policy and monitoring systems.  
+
+## Linking NAP to Sector and Local Planning 
+
+The NAP and its linkages to the MTDP can serve as means to integrate adaptation into existing sector and local planning processes. The current planning process is presented in the graphic below. At each stage, there are clear entry points for the NAP process. 
+
+![Linking NAP to Sector and Local Planning](images/linking nap.png)  
+ 
+
+## NAP Entry Points at each stage in the policy process
+
+__Strategy Development__  
+
+*	Support the identification of information needs with agricultural, marine, aviation, hydrological, and climatological data services
+*	Applying risk and vulnerability assessments and socio-economic scenarios in a regular manner
+*	Spatial planning maps incorporating climate risk, hazards, key infrastructure, social and demographic data 
+*	Prioritizing adaptation into sector and local strategies, plans and budgets at the strategic and planning levels 
+*	Discussion across sectors about how to link sector strategies 
+
+__Implementation Planning__  
+
+*	Identifying adaptation options to support scaling up in a systematic and structured way 
+*	Integrated economic appraisal of projects and programs 
+*	Prioritizing programs (for example, using multi-criteria and economic tools)  
+*	Developing centralized planning/screening guidelines for climate change and disaster risk reduction for inclusion in official templates  
+*	Gender checklists and gender responsive criteria 
+*	Identify adaptation indicators and targets
+*	Developing realistic financing plans 
+*	Engage donor to fund adaptation priority programs 
+
+__Approval__
+
+*	Apply centralized planning/screening guidelines for climate change and disaster risk reduction 
+
+__Budgeting__
+
+*	Costing adaptation options
+*	Prioritize adaptation activities 
+
+__Implementation__ 
+
+*	Integrate new climate information to tailor implementation strategy 
+*	Inform public about linkages between project and climate impacts 
+*	Capacity Building for all implementors to understand linkages between adaptation and their work 
+
+__Monitoring and Reporting__
+
+*	Track national progress toward adaptation targets
+*	Integrate adaptation into national M&E systems 
+*	National and international reporting on adaptation 
+*	collects data for measuring adaptation baselines and performance 
+*	MRV of support: finance, technology transfer, capacity building
+*	Feed into systemic and iterative national adaptation planning 
+*	Work with local animators/structures to generate climate and disaster data in real time
+*	Train CSOs to monitor climate change adaptation projects implemented by MDAs
+
+## Non-government Stakeholder Groups and Roles
+
+There are important roles for non-government stakeholders to play in planning, implementation and monitoring and evaluation of the NAP. Through taking a collaborative and whole of society approach, the NAP has ownership and support across sectors, scale and communities. More specific roles within coordination bodies and suggested organizations are provided in the next section. 
+ 
+* Civil society organizations (CSOs): The NAP process in Sierra Leone will actively engage the CSOs in planning, advocacy, education and awareness-raising, evidence-based research, and M&E of adaptation efforts at various levels in the country. This will include women rights and youth organizations. 
+
+ * Academia and research institutions: This group can conduct research on different aspects of climate change adaptation, vulnerability and resilience, and it should be guided to align its focus areas with adaptation priorities, so that its impact is as direct as possible vis-à-vis adaptation action. This includes improving the understanding of climate change impacts on the population and the environment, as well as developing partnerships with Government entities and communities to conduct adaptation that addresses adaptation needs in Sierra Leone. 
+
+* Private sector: Large, medium and small businesses can support a business case for private sector investment in adaptation, finance and incentivize adaptation actions. It can also be an engine for empowering women-led enterprises and women entrepreneurs.
+
+ * Development partners: Sierra Leone’s NAP process recognizes the role of the international community, especially development partners, as critical for resource mobilization, capacity development, and technology development and transfer for current and future adaptation actions. 
+
+* Traditional and religious leaders: These leaders have an important role in society and can promote climate change adaptation practices. 
+
+* Media: The media can build awareness around adaptation and climate change, share stories of adaptation actions to spur actions and provide avenues for learning about adaptation inside and outside the country.  
+
+* Public: The general public has a vital role to play in the planning, implementation and monitoring of the NAP and adaptation interventions in order to enhance their adaptive capacity and resilience to climate shocks
+
+## Institutional Framework Coordination Mechanisms
+
+The institutional framework below builds on the plan from the NAP Framework. At the top, it includes a Parliamentary Committee (PC) and an Inter-ministerial Committee (IC). These two committees will be created to gain the political and legislative support needed for implementing the NAP. The Inter-ministerial Committee is co-chaired by the Ministries of the Environment and Finance. The IC will have ministers or their designees from the priority sectors. The IC will provide policy oversight, coordination and resource mobilization for the NAP. The Parliamentary Committee (PC) chaired by the head of the Environment Committee in the House of Parliament. Its members PC comprise leaders and secretaries of the parliamentary committees identified. The Parliamentary Committee (PC) provides legislative support and oversight, monitoring and evaluation, policy advocacy and public outreach.
+
+The IC and PC will oversee the National Steering Committee (NSC). Chaired by the Environment Protection Agency, the NSC will include departments and agencies of government from the priority sectors. The NCS roles include overall coordination of NAP implementation, define policies and strategies, resource mobilization, ensure policy coherence, lead adaptation planning across sectors and levels and drive the ownership of the NAP process.   
+A Scientific and Technical Advisory Taskforce will provide technical support and advisory services to the NSC and the consultative committees. This includes data gathering and analysis, advising the NSC and consultative committees on data gathering and dissemination best practices, define, identify and conduct research to support adaptation actions for vulnerable groups including women, people with disabilities, children and the elderly, develop processes for information sharing and collection of lessons learned, coordinate bilateral and multilateral assistance and link with municipalities and support actions on sectoral priorities. 
+There are three consultative committees: (1) the private sector consultative group, (2) local councils, communities and civil society consultative group and (3) development partner consultative group. The three committees provide policy and implementation advice the steering committee on relevant issues and build support for NAP implementation through activities such as research, capacity building and awareness raising.
+
+__Institutional Framework__
+                          
+ ![Institutional Framework](images/inst-framwk.png)
+
+Proposed members of Committees and Roles 
+
+```{r}
+Committees<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "Committees")
+t1<-flextable(Committees,col_keys = names(Committees),
+  cwidth = 2.5,
+  cheight = 0.01,
+  defaults = list(),
+   theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 8)
+t3<-border_outer(t2,part = 'all', border = NULL)
+t4<-bold(t3,part = 'header')
+t5<-vline(t4, part = 'all')
+t6<-hline(t5,part='body',i=c(19,26,41,72,50))
+t6
+
+```
+
+
+## Recommendations
+
+Based on the information contained in this chapter, there are several priorities with respect to improving the NAP process that should be addressed. 
+
+*	Determine clear legal pathway to incorporate guidance and recommendations from the NAP into sector and local planning and budgeting processes, and to implement the priorities described in the NAP.  
+
+*	Set legal guidance for clear mandate and roles for the various agencies working on climate change.
+
+*	A data sharing agreement should be signed between all responsible agencies to enable information sharing and knowledge exchange in a transparent and participatory manner.
+
+*	The NAP process should be aligned with current and future development plans, so that institutions responsible for national development planning and budgeting can feel involved and obliged to contribute.
+
+*	Increase coordination roles of the Ministry of Environment in climate change adaptation. This includes convening government and non-government stakeholders, supporting capacity building and information exchange and building a shared understanding of policy, project and program implementation goals.
+
+*	Establish the institutional system presented in this chapter.
+
+*	Appoint and provide capacity building support to sectoral focal points and sectoral adaptation teams, which will guide the process of mainstreaming climate change adaptation and implementation of the NAP within sectors.
+

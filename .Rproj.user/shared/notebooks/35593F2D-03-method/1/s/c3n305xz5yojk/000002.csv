@@ -1,0 +1,5 @@
+"0","pr245.40<-stack(""wc2.1_2.5m_prec_BCC-CSM2-MR_ssp245_2021-2040.tif"")%>%crop(sleone0)%>%mask(sleone0)"
+"0","#plot(pr245.40)"
+"0","prvar245<-pr245.40-basepr"
+"0","names(prvar245)<-month.abb"
+"0","plot(prvar245, xlab='Longitude', ylab='Latitude')"

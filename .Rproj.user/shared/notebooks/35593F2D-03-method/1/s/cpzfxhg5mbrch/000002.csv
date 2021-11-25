@@ -1,0 +1,6 @@
+"0","pr585.40_inland<-stack(""wc2.1_2.5m_prec_BCC-CSM2-MR_ssp585_2021-2040.tif"")%>%crop(slinland)%>%mask(slinland)"
+"0","#plot(pr585.40)"
+"0","prvar585_inland<-pr585.40_inland-baseinland"
+"0","names(prvar585_inland)<-month.abb"
+"0",""
+"0","plot(prvar585_inland, xlab='Longitude', ylab='Latitude')"

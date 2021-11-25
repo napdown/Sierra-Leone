@@ -1,0 +1,13 @@
+"0",""
+"0","#pr1<-cruts2raster(""C:\\Workspace\\RMardown_NAPS\\Open-NAPs-Data\\opennaps\\cru_ts4.05.1901.2020.pre.dat.nc"", poly = sleone0, timeRange = c('1981-01-01','2019-12-31') )"
+"0",""
+"0","prstack<-stack(""C:\\Users\\Makabe\\opennaps\\cru_ts4.05.1901.2020.pre.dat.nc"")"
+"2","Warning in .varName(nc, varname, warn = warn) :"
+"2","
+ "
+"2"," varname used is: pre
+If that is not correct, you can set it to one of: pre, stn
+"
+"0","crop<-raster::crop(prstack, sleone0)"
+"0","pr_mask<-mask(crop,sleone0)"
+"0","plot(pr_mask) ## optional; to view raster"

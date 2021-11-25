@@ -1,0 +1,5 @@
+"0","pr126.40_inland<-stack(""C:/Users/Makabe/opennaps/WC_Fut_data/pr126/wc2.1_2.5m_prec_BCC-CSM2-MR_ssp126_2021-2040.tif"")%>%crop(slinland)%>%mask(slinland)"
+"0","#plot(pr126.40)"
+"0","prvar126_inland<-pr126.40_inland-baseinland"
+"0","names(prvar126_inland)<-month.abb"
+"0","plot(prvar126_inland, xlab='Longitude', ylab='Latitude')"

@@ -1,0 +1,175 @@
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
+``` 
+# Adaptation Related Policies, Plans and Programs
+
+## Introduction 
+
+The chapter presents existing policies and plans that are related to the formulation and implementation of the NAP. The first section explores adaptation plans and policies, followed by plans that are related to formulating a comprehensive NAP. Lastly, the chapter describes a number of opportunities, challenges and gaps with respect to alignment with the existing strategic, legal and regulatory frameworks. 
+
+## Climate Change Adaptation Plans and Policies 
+
+Sierra Leone has rapidly increased its climate policy portfolio since its NAPA was produced in 2007. Since then, it has developed a National Climate Change Policy, a National Climate Change Strategy and Action Plan, a National Determined Contribution (NDC) and three National Communications to the UNFCCC. It has also begun its NAP process prior to this document with a NAP Framework and a NAP Communications Plan. All these documents lay the foundation for the NAP. 
+
+__Timeline__  
+
+```{r ft.align='right'}
+
+timeline<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "Timeline")
+t1<-flextable(timeline,col_keys = names(timeline),
+  cwidth = 10,
+  cheight = 0.25,
+  defaults = list(),
+    theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 8)
+t3<-border_remove(t2)
+t3
+
+```
+
+
+__National Adaptation Plan of Action (NAPA) (2007)__
+
+From the start Sierra Leone has linked adaptation with its national development planning and international development goals. The NAPA document was based on the goals and objectives of the Poverty Reduction Strategy Paper (PRSP) and the Millennium Development Goals (Government of Sierra Leone 2007b). The NAPA specifically linked to PRSP goals to improve public health and biodiversity to support sustainable development. The NAPA projects were focused on immediate needs and the most urgent adaptation concerns in six sectors. 
+
+__National Climate Change Policy (2012)__
+
+Developed through a participatory and iterative process, this National Climate Change Policy was developed following an assessment of climate risks based on its INC, NAPA, and Second National Communication. One of the policy goals is to enhance national capacity to adapt to climate change. Its mission is “to strengthen national initiatives to adapt to and mitigate climate change in a participatory manner that involves engaging all sectors of the Sierra Leone’s society with appropriate and adequate consideration for the women, the youths, the aged, the poor and other vulnerable groups within the overall context of advancing sustainable socio-economic development in Sierra Leone” (2012a).  
+
+The policy makes clear the need for mainstreaming of adaptation and the links between its climate change and development planning. Specifically, it states, “climate change mainstreaming is imperative, which involves the integration of policies and measures to address climate change into our sectors and development planning and decision making, so as to ensure the long-term sustainability of our investments as well as reduce the sensitivity of development activities to both today’s and tomorrow’s climate.” Mainstreaming climate change into development is viewed as necessary for making development and society more resilient.   
+
+__National Climate Change Strategy and Action Plan (2015a)__
+
+The Action Plan moved Sierra Leone climate policy forward. It includes adaptation actions in the agriculture sector, adaptation to sea level rise, tourism sector, fisheries, forestry, health and water resources. It includes projects with activities and costs. It also includes a resource mobilization strategy. It will be updated in 2021. It will be cross-sectoral and focus on vulnerable sectors and communities. It will include issues such as early warning systems, flood prevention infrastructure, capacity building and livelihood support.  
+
+__National Communications to the UNFCCC__
+
+Sierra Leone has completed three National Communications to the UNFCCC. The first was completed in 2007, the second in 2012 and the third in 2018. The Initial National Communication under the UNFCCC includes a chapter on vulnerability and adaptation (Government of Sierra Leone 2007a). Adaptation measures were included for agriculture, forests, water resources and coastal zone with particular focus on public health. The policy development process produced the first vulnerability assessments for the country. The second national communication focused on agriculture, forestry, water resources, human health, coastal resources and human settlements and tourism (Government of Sierra Leone 2012b). The third national communication focused on agriculture, water resources, human health and coastal resources and human settlements (Government of Sierra Leone 2018). All three include vulnerability and adaptation interventions by sector based on limited data.   
+
+
+
+__Nationally Determined Contribution to the Paris Agreement (NDC)__ 
+
+The NDC’s vision is “to create a new era for a harmonious relationship between the economy, environment, social and long-term sustainability; shifts to a green economy and provides for the identification and implementation of various mitigation and adaptation measures” (Government of Sierra Leone 2015b). One of its goals is “reducing vulnerability to climate change impacts and increasing the resilience and sustainable wellbeing of all citizens.” It is linked to previous climate and development policies and the NAP, in particular the National Climate Change Plan, National Climate Change Strategy and Action Plan and the NAPA. The NDC is iterative and it will be reviewed to inform the Medium-Term Development Plan. The NDC also included the intention to link the NAP and NDC actions moving forward. This will be carried out as the NDC will be updated in 2021 and be linked to the NAP process moving forward. It is also explicitly tied to the NAP and the actions listed in the NDC will be implemented through the NAP. 
+
+Additionally, the NDC makes clear that gender mainstreaming is a key component of the Medium-Term National Development Plan and NDC. This adds to the mandate for a gender responsive NAP Process. 
+
+__NAP Framework__
+
+The NAP Framework (2019) was a first step to formulate and implement the NAP. It aims to set objectives for and determine the principles, approaches and structure of the NAP process for the country. This served as a basis for the NAP as part of an iterative and consultative policy process. 
+
+__Sierra Leone’s Climate Change Communications Strategy Under the National Adaptation Plan (2020)__
+
+The communication strategy aims to provide short- and mid-term direction on how the Government can utilize information strategically and effectively to support the NAP process. The strategy has the following goals: (1) Improve awareness and understanding of the Government of Sierra Leone’s climate change adaptation initiatives and the NAP process through effective communication, education and training. (2) Promote an inclusive and participatory approach to adapting to climate change so that the Government of Sierra Leone can unite under a common vision and speak with one voice on the issue of addressing climate change impacts; (3) Generate support and political commitment among key decision-makers for the NAP process and for prioritizing, managing and resourcing efforts to address climate change adaptation issues; (4) Persuade the general public and the private sector of the need for a significant and timely investment in climate change adaptation from both public and private sources within and outside of Sierra Leone; (5) Encourage Sierra Leoneans to collectively embark on activities to strengthen the country’s resilience to climate change.
+
+
+__Coastal Climate Change Adaptation Plan (CCCAP)__
+
+This plan was produced through a USAID project and was designed to be integrated into the NAP process. The primary vision of CCCAP is to identify and implement measures to conserve and make the best use of the coastal resources of Sierra Leone and contribute to the Sustainable Development Goals for the benefits of present and future generations through an ecosystem-based approach to climate change adaptation in the coast of Sierra Leone, as part of efforts to foster climate resilience in the country and hopefully with replication in West Africa. The ultimate outcome is to have coastal landscapes in Sierra Leone that are organized and furnished with the tools to plan for and adapt to the impacts of climate change.  
+
+__Strategy for the Development of a Climate Change Abatement Economy (2010)__
+
+The strategy focuses on opportunities for earning forest carbon credits through the implementation of REDD/REDD+ programs. It articulates governments goals to develop and manage 2.5 million hectares of forests in the next decade to assist income-generating activities of non-timber forest products, sustainable tree crops and ecotourism.   
+
+__National Framework for Climate Services (NFCS)__
+
+The NFCS for Sierra Leone is a response to the declaration of the World Climate Conference-3 (WCC-3) held in Geneva in 2009. It is set on the premise that a national framework is necessary for strengthening the design, delivery and application of climate services across sectors and communities. The action plan allows actors within the climate action arena to meet GFCS (Global Framework for Climate Services) requirements and contribute to wider national and global efforts seeking to address the effects and impacts of climate change. It will support the integration of climate science and action into decision-making at different levels and across scale, and thus, ensure that the country is fully prepared to generate and use information on the risks and vulnerabilities that may cause severe losses and damage in the long-term. This makes the NFCS one of few unique country-level attempts to highlight the importance of a coordinated action to address requirements for engaging globally on matters of climate change.  
+
+## Other relevant Documents and Policies
+
+This section describes additional policies, strategies, and plans that are relevant to the NAP process. 
+
+__The National Environmental Policy (NEP)__
+
+As the first national policy concerning the environment the NEP, which was approved in 1990 and revised in both 1994 and 2002, is a milestone document for environmental management with enormous implications for climate change. This policy highlights the general principles to be considered by all activities that have potential implications for the environment, in particular outlining the main environmental goals and objectives that underlie Sierra Leone’s aspiration for sustainable development. Its relevance to climate change can be viewed in terms of the restraints that it poses to the uncontrolled use of forests, along with their natural resources.  
+
+__The National Environmental Action Plan (2002)__
+
+Unlike the NEP, this plan (NEAP) sought to identify the specific activities that needed to be undertaken in order to protect Sierra Leone’s environment. Most of these activities, which were intended to be integrated into any future national development plan for the country, relate to such issues as environmental education and training, environmental information systems (EIS), and the integration of NEAPs into national development plans. Because this plan also ranks and prioritizes environmental actions with a strong emphasis on protecting security of tenure, it has serious implications for climate change.  
+
+__The Environmental Protection Agency Act (2008) and Environmental Protection Agency (Amendment) Act, 2010__
+
+The act created the Environmental Protection Agency and raised the profile of the environment within the administrative structure. This Act mandates the EPA-SL among others to a: Advise the President on the formulation of policies on all aspects of the environment and in particular make recommendations for the protection of the environment. It made the EPA the environmental focal point to ensure that Sierra Leone complies with relevant Multilateral Environmental Agreements (MEA’s).  
+
+__Sierra Leone Meteorological Agency Act (2017)__
+
+The 2017 SLMA Act establishes the Sierra Leone Meteorological Agency as the sole authority for providing meteorological and climatological services across Sierra Leone.  
+
+__National Disaster and Risk Management Policy (DRAFT)__
+
+Sierra Leone developed its National Disaster and Risk Management Policy to address disasters and hazards which impose serious impediments to its development. It aims at (i) decreasing vulnerability among people and communities at risk from shocks, (ii) decreasing social, economic and environmental impacts and consequences of disasters, and (iii) avoiding setbacks on the national path towards sustainable development.
+
+__National Drought Management Plan, 2018 (A contingency Plan for Sierra Leone)__
+
+The NDMP, funded by the United Nations Convention to Combat Desertification (UNCCD), presents general guidelines for developing drought preparedness, and planning and managing actions for monitoring, impact prediction and assessment, and mitigation. It promotes incentives for a more proactive, anticipatory approach to drought management, and emphasizes the need to learn lessons from previous efforts to manage related risks and impacts while documenting, evaluating, and sharing information at multiple levels. 
+
+__National Land Degradation Neutrality (LDN) Target Setting Process (2018)__
+
+In the Land Degradation Neutrality (LDN) Target Setting process, Sierra Leone’s Technical Working Group (TWG) identified and established hotspots of degraded areas using the three indicators of land cover, land productivity dynamics and soil organic carbon content. The hotspots provided useful guidelines for establishing baselines of land degradation, from which the national voluntary targets were set.
+
+__The National Biodiversity Strategy and Action Plan (2003)__
+
+Developed in 2003, the NBSAP was formulated based on the NEAP. Its relevance to climate change is the highlighting of the condition of Sierra Leone’s biological and ecological resources and the threats posed to their existence. This plan specifically identifies a range of cross-sectoral actions needed to ensure the effective protection and sustainable use of the country’s resources. Several of these priority actions relating mainly to such thematic issues as forest management, land degradation, and soil and water management have also been outlined among the key priority activities of the NAPA. 
+
+__Integrated Coastal Zone Management Plan 2016-2020 (2015) (ICZMP)__				
+It is the first ICZM plan for Sierra Leone and was created to implement the recommendations from the State of the Marine Environment report. The goal of the plan is to conserve the coastal and marine environment and to ensure that its resources are utilized in a sustainable manner for the benefit of coastal communities and the country as a whole. 			
+
+__Offgrid Solar Energy Strategy (OGSES)__
+
+The Offgrid Solar Energy Strategy and Monitoring Mechanism reviews and consolidates the many documents, plans, and policies in current use in the sector to develop deeper insights into the research and debates relevant to off-grid solar energy (OGSE) issues, including Stand-Alone Systems (SAS), Solar Home Systems (SHS), and productive uses of solar power, and identifies gaps, overlaps, and topics that should be included in the National Electrification Plan (NEP). It serves as a benchmark for examining the current situation of off-grid SAS and SHS solutions, maps stakeholders in terms of their influence and interest in these systems and offers a reference point for assessing progress made with the implementation of any future off-grid solar strategies and action plans.  
+
+__National Policy on the Advancement of Women (2009) and the National Policy on Gender Mainstreaming (2009)__
+
+These policies were reinforced by the National Gender Strategic Plan (2009-2012), and the Sierra Leone National Action Plan (SILNAP) on United Nations Security Council Resolution (UNSCR) 1325 on Women, Peace and Security and UNSCR 1820 on Sexual Violence were adopted in 2009 and 2010 respectively.
+
+## CCA Projects and Programs
+
+There have been numerous climate change adaptation projects and programs carried out by various international and national agencies. Many of these projects have been implemented in collaboration with civil society organizations.  These projects have had numerous positive impacts including diversification in the Meteorological agency’s capacity for information collection, processing and advisory services, increased awareness of climate change, support for communities and civil society, and piloting of adaptation actions. This list demonstrates that adaptation actions have occurred across sectors and the high donor dependence of adaptation work in Sierra Leone.   
+
+```{r}
+cca_projects<-readxl::read_excel("Tables_from_NAP.xlsx", 
+    sheet = "CCA Projects and Programs ")
+t1<-flextable(cca_projects,col_keys = names(cca_projects),
+  cwidth = 3,
+  cheight = 0.01,
+  defaults = list(),
+   theme_booktabs())
+t2<-fontsize(t1,part = 'all', size = 8)
+t3<-border_outer(t2,part = 'all', border = NULL)
+t4<-border_inner(t3,part = 'all', border = NULL)
+t5<-bold(t4, part='header')
+t6<-bold(t5, j=1)
+t6
+
+```
+
+ 
+## Policy Opportunities, Challenges and Needs 
+
+This section briefly describes some needs and opportunities to support adaptation policy, planning and projects:
+
+*	Review and revise the Draft Climate Policy
+
+*	Develop a Climate Act to mandate the integration of adaptation into development planning and clarify institutional roles and create a mandate for a National Climate Steering Committee.
+
+*	Most current policies, strategies and regulatory mechanisms have limited or no consideration of climate change issue. Vulnerability and risk assessment conducted as part of the NAP process can be used to revise existing policy to integrate climate risks into plans. 
+
+*	There is a lack of coordination and policy coherence across adaptation and adaptation-related policies. The Ministry of Environment should work to integrate all environmental institutions under its mandate in order to simplify policy development, coordination and monitoring and evaluation.
+
+*	Sierra Leone should review some of the sector policies and legal frameworks in the light of the required collaboration and coordination of the roles and functions of the MDAs to address adaptation. No Agency can efficiently function as a standalone agency and adaptation needs to be integrated into the daily work of each agency and their plans. 
+
+*	The Ministry of Environment should engage all international convention focal points, organize quarterly meetings, and ask for status reports. This will enable them to  leverage capacities within different agencies and departments and set standards for collaboration, communication and public engagement.  
+
+*	All adaptation projects developed by MDAs should be reviewed by the Steering Committee to ensure that institutions collaborate and coordinate adaptation actions. The Ministry of the Environment could facilitate the setting up and coordination of the Steering Committee and provide regular reports on its performance.
+
+*	There is a lack of mechanisms to disseminate project information, lessons learned, and best practices to other stakeholders, including government departments. There has also not been any integrated assessment of adaptation projects as a whole to share lessons learned and use the assessment to create approaches that can be scaled up across the country. The NAP process can support the development of an integrated reporting and learning system. This would allow for the collection and analysis of previous projects and a systematic reporting and make the information available for all stakeholder in order to support use the information to inform all stakeholders and develop more effective programs in the future.
+*	Currently, there is no specific budget allocation for adaptation in Ministry budgets. This makes plans difficult to implement. A certain portion of the budget should be committed for adaptation to enable national institutions involved in planning and delivering climate adaptation projects can have more ownership over climate finance projects and be able to support their sustainability beyond the project termination.  
+
+*	Build the capacity of the universities to be able to provide the expertise and services required to support effective policy implementation and develop a new generation of climate adaptation experts. 
+
+*	There is a need to increase public and government awareness on (a) climate change impacts and risk (b) adaptation measures, and (c) how human interaction can either diminish (through adaptation and preparedness) or exacerbate climate change impacts. The NAP process can be used as a means to educate the public through implementing the NAP Communications Strategy. 
+
+*	Policies do not incentivize private sector engagement. 
+

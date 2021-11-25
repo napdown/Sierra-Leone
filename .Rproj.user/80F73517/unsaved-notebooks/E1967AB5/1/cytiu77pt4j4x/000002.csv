@@ -1,0 +1,110 @@
+"0","# Initialise the application and provide a title
+@ct.application(
+    description='Yearly anomalies of 2m air temperature in Europe - relative to 1981-2010 climate normal period'
+)
+
+# Define an output widget
+@ct.output.livefigure()
+
+# Define the application function
+def calculate_anomalies():
+    '''
+    Computes climate anomalies of monthly 2m air temperature values for Europe for 41 years (1979-2019) based on the climate normal period 1981-2010. Plot results in a bar chart.
+    
+    Returns:
+    - interactive livefigure
+    '''
+
+"
+"2","AttributeError: 'Client' object has no attribute 'application'
+"
+"0","    # Retrieve monthly 2m air temperature data from 1979 to 2019 for Europe"
+"0","    t2m_monthly_mean = ct.catalogue.retrieve("
+"0","        'reanalysis-era5-single-levels-monthly-means',"
+"0","        {"
+"0","            'product_type':'monthly_averaged_reanalysis',"
+"0","            'variable':'2m_temperature',"
+"0","            'year': [ '1979','1980','1981','1982','1983','1984','1985','1986','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015', '2016', '2017', '2018', '2019'"
+"0","                    ],"
+"0","            'month': list(range(1, 12 + 1)),"
+"0","            'time':'00:00',"
+"0","            'grid':[0.25, 0.25],"
+"0","            'area':['75', '-15', '30', '42.5']"
+"0","        }"
+"0","    )"
+"2","AttributeError: 'Client' object has no attribute 'catalogue'
+"
+"0","#####################################################"
+"0","# Calculate the temperature anomalies providing the interval for the normal period"
+"0","#####################################################"
+"0",""
+"0","    t2m_anomalies = ct.climate.anomaly("
+"0","        t2m_monthly_mean,"
+"0","        interval=['1981','2010']"
+"0","    )"
+"2","AttributeError: 'Client' object has no attribute 'climate'
+"
+"0","#####################################################"
+"0","# Average the values for Europe"
+"0","#####################################################"
+"0","    # Calculate the spatial average to give one anomaly value per month for the whole of Europe"
+"0","    t2m_anomalies_europe = ct.geo.spatial_average("
+"0","        t2m_anomalies"
+"0","    )"
+"2","AttributeError: 'Client' object has no attribute 'geo'
+"
+"0","#####################################################"
+"0","# Resample from monthly values to mean values per year"
+"0","#####################################################"
+"0","    t2m_anomalies_europe_yearly = ct.cube.resample("
+"0","        t2m_anomalies_europe, freq='year'"
+"0","    )"
+"2","AttributeError: 'Client' object has no attribute 'cube'
+"
+"0","#################################################"
+"0","# Plotting example"
+"0","#################################################     "
+"0","# Define the resulting figure as a bar chart representing the yearly anomalies of 2m air temperature for Europe    "
+"0","    "
+"0","    # Set general information on the plot style, e.g. width and height, title of x and y axes etc. The dictionary is then used when the figure object is defined"
+"0","    layout_kwargs = {  "
+"0","        'width':800,"
+"0","        'height':500,"
+"0","        'legend': {'orientation':'h',"
+"0","                  'y':-0.15,"
+"0","                  'x':0.1},"
+"0","        'yaxis': {"
+"0","            'zeroline': False,"
+"0","            'title':'Anomaly in deg Celsius'"
+"0","        },"
+"0","        'margin':{'t':25},"
+"0","        'xaxis':{"
+"0","            'title': 'Year'"
+"0","        }"
+"0","    }"
+"0","    "
+"0","    # Defines the color of the bar plot; blue where the anomaly is positive and red where it is positive.   "
+"0","    bar_color = ct.cube.where("
+"0","        t2m_anomalies_europe_yearly > 0,"
+"0","        'rgb(0.77,0.23,0.23)',"
+"0","        'rgb(0.19,0.49,0.72)'"
+"0","    )"
+"2","AttributeError: 'Client' object has no attribute 'cube'
+"
+"0","    "
+"0","    # Plot the anomalies as a bar plot   "
+"0","    fig = ct.chart.bar("
+"0","        t2m_anomalies_europe_yearly,"
+"0","        bar_kwargs={"
+"0","            'name':'2m air temperature'"
+"0","        },"
+"0","        marker = {'color': bar_color},"
+"0","        layout_kwargs=layout_kwargs"
+"0","    )"
+"2","AttributeError: 'Client' object has no attribute 'chart'
+"
+"0","   "
+"0","    # Return the plot to be shown as livefigure"
+"0","    return fig  "
+"2","SyntaxError: 'return' outside function (<string>, line 1)
+"

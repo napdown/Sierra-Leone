@@ -1,0 +1,6 @@
+"0","tn585.40_inland<-stack(""wc2.1_2.5m_tmin_BCC-CSM2-MR_ssp585_2021-2040.tif"")%>%crop(slinland)%>%mask(slinland)"
+"0","tx585.40_inland<-stack(""wc2.1_2.5m_tmax_BCC-CSM2-MR_ssp585_2021-2040.tif"")%>%crop(slinland)%>%mask(slinland)"
+"0","tmn585.40_inland<-(tn585.40_inland+tx585.40_inland)/2"
+"0","tvar585_inland<-tmn585.40_inland-baseinland"
+"0","names(tvar585_inland)<-month.abb"
+"0","plot(tvar585_inland, xlab='Longitude', ylab='Latitude',col=heat.colors(10, rev = T))"
